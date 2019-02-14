@@ -1,6 +1,5 @@
 package fr.sle.customauth.security;
 
-import com.sun.tools.javac.util.List;
 import fr.sle.customauth.Device;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,6 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -31,7 +32,7 @@ public class AuthTokenHasherAuthenticationProviderTest {
 
         AuthTokenAuthenticationToken authenticationToken = new AuthTokenAuthenticationToken("deviceIP", RAW);
 
-        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_SUPER_DEVICE"));
+        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_SUPER_DEVICE"));
 
         Mockito.when(authTokenService.authenticate(RAW)).thenReturn(Optional.of(new Device("device0001",
                 authorities)));
